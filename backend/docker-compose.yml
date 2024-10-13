@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  backend:
+    build: .
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - MONGO_URI=mongodb://mongo:27017/financial-management
+      - JWT_SECRET=myjwtsecret
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
